@@ -15,9 +15,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+//global variable
+let posts = [];
+
 app.get("/", function(req, res){
   //here i am passing my Key:Value pair.
  res.render("home", {startingContent:homeStartingContent});
+// arrived from app.post
+console.log(posts); 
 });
 
 app.get("/about", function(req, res){
@@ -33,7 +38,18 @@ app.get("/compose", function(req, res){
 });
 // trying to reveal/see/update the text input inside the form created 
 app.post("/compose", function(req, res){
-  console.log(req.body.postTitle);
+  //creating an object
+  const post = {
+    title: req.body.postTitle, 
+    content: req.body.postBody
+  };
+
+  // adding a single post, created just above into the global variable  i created above (into the array).
+  posts.push(post);
+//inorder to move from the app.post to app.get i have to do the following:
+
+res.redirect("/");
+
 })
 
 
