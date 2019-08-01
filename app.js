@@ -20,9 +20,10 @@ let posts = [];
 
 app.get("/", function(req, res){
   //here i am passing my Key:Value pair.
- res.render("home", {startingContent:homeStartingContent});
+ res.render("home", {startingContent:homeStartingContent, 
+                    posts:posts});
 // arrived from app.post
-console.log(posts); 
+
 });
 
 app.get("/about", function(req, res){
